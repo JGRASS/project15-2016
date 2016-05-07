@@ -19,6 +19,8 @@ import javax.swing.JButton;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.BoxLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GlavniProzor extends JFrame {
 
@@ -124,6 +126,11 @@ public class GlavniProzor extends JFrame {
 	private JMenuItem getMntmNoviFilm() {
 		if (mntmNoviFilm == null) {
 			mntmNoviFilm = new JMenuItem("Novi film");
+			mntmNoviFilm.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					GUIKontroler.prikaziProzorDodajFilm();
+				}
+			});
 			mntmNoviFilm.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
 		}
 		return mntmNoviFilm;
@@ -150,7 +157,7 @@ public class GlavniProzor extends JFrame {
 	}
 	private JLabel getLblDobroDosliU() {
 		if (lblDobroDosliU == null) {
-			lblDobroDosliU = new JLabel("Dobro dosli u Registar Filmova :D");
+			lblDobroDosliU = new JLabel("Dobrodosli u Registar Filmova");
 			lblDobroDosliU.setHorizontalAlignment(SwingConstants.CENTER);
 			lblDobroDosliU.setFont(new Font("Tahoma", Font.BOLD, 15));
 		}

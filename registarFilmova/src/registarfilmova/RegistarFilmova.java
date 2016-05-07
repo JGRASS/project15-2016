@@ -2,6 +2,7 @@ package registarfilmova;
 
 import java.io.Serializable;
 import java.util.LinkedList;
+
 import registarfilmova.interfejs.RegistarFilmovaInterfejs;
 import registarfilmova.sistemskeoperacije.SOobrisiFilm;
 import registarfilmova.sistemskeoperacije.SOoceniFilm;
@@ -16,7 +17,16 @@ public class RegistarFilmova implements RegistarFilmovaInterfejs, Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private LinkedList<Film> filmovi = new LinkedList<Film>();
+	LinkedList<Film> filmovi = new LinkedList<Film>();
+	
+    private static RegistarFilmova instance;
+	
+
+	public static RegistarFilmova getInstance(){
+		if(instance == null)
+			instance = new RegistarFilmova();
+		return instance;
+	}
 
 	@Override
 	public void unesiFilm(Film f) {
