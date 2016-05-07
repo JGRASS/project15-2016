@@ -8,15 +8,16 @@ public class Film {
 	private String naziv;
 	private String reditelj;
 	private int godina;
-	private int ocena;
-
-	public Film(int id, String naziv, String reditelj, int godina, int ocena) {
-		super();
+	private double prosecnaOcena;
+	private int brojOcena;
+	private Zanr zanr;
+	
+	public Film(int id, String naziv, String reditelj, int godina, Zanr zanr) {
 		this.id = id;
 		this.naziv = naziv;
 		this.reditelj = reditelj;
 		this.godina = godina;
-		this.ocena = ocena;
+		this.zanr = zanr;
 	}
 
 	public int getId() {
@@ -42,14 +43,6 @@ public class Film {
 	public void setReditelj(String reditelj) {
 		this.reditelj = reditelj;
 	}
-	
-	public int getOcena() {
-		return ocena;
-	}
-
-	public void setOcena(int ocena) {
-		this.ocena = ocena;
-	}
 
 	public int getGodina() {
 		return godina;
@@ -57,6 +50,30 @@ public class Film {
 
 	public void setGodina(int godina) {
 		this.godina = godina;
+	}
+
+	public int getBrojOcena() {
+		return brojOcena;
+	}
+
+	public void setBrojOcena(int brojOcena) {
+		this.brojOcena = brojOcena;
+	}
+
+	public double getProsecnaOcena() {
+		return prosecnaOcena;
+	}
+
+	public void setProsecnaOcena(double prosecnaOcena) {
+		this.prosecnaOcena = prosecnaOcena;
+	}
+	
+	public Zanr getZanr() {
+		return zanr;
+	}
+
+	public void setZanr(Zanr zanr) {
+		this.zanr = zanr;
 	}
 
 }
