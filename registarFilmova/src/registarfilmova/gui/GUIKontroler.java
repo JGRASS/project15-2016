@@ -17,6 +17,7 @@ import registarfilmova.Film;
 import registarfilmova.RegistarFilmova;
 import registarfilmova.Zanr;
 import registarfilmova.interfejs.RegistarFilmovaInterfejs;
+import registarfilmova.sistemskeoperacije.SOsacuvajFilm;
 import registarfilmova.sistemskeoperacije.SOucitajFilm;
 import registarfilmova.sistemskeoperacije.SOunesiFilm;
 
@@ -131,6 +132,23 @@ public class GUIKontroler extends JFrame {
 	public static void prikaziProzorOceniFilm() {
 		prozorOceniFilm.setLocationRelativeTo(glavniProzor.getContentPane());
 		prozorOceniFilm.setVisible(true);
+	}
+
+	public static void sacuvajFilm() {
+		try
+		{
+			JFileChooser jfc = new JFileChooser();
+			int option = jfc.showSaveDialog(glavniProzor.getContentPane());
+
+			if (option == JFileChooser.APPROVE_OPTION)
+			{
+				File file = jfc.getSelectedFile();
+				SOsacuvajFilm.izvrsi(file.getAbsolutePath(), registarFilmova.vratiSveFilmove());
+			}
+	} catch(Exception e){
+		JOptionPane.showMessageDialog(glavniProzor.getContentPane(), e.getMessage(),
+				"Greska", JOptionPane.ERROR_MESSAGE);
+	}		
 	}
 
 	
