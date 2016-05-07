@@ -2,9 +2,6 @@ package registarfilmova;
 
 import java.io.Serializable;
 import java.util.LinkedList;
-
-import javax.lang.model.SourceVersion;
-
 import registarfilmova.interfejs.RegistarFilmovaInterfejs;
 import registarfilmova.sistemskeoperacije.SOobrisiFilm;
 import registarfilmova.sistemskeoperacije.SOoceniFilm;
@@ -15,6 +12,10 @@ import registarfilmova.sistemskeoperacije.SOunesiFilm;
 
 public class RegistarFilmova implements RegistarFilmovaInterfejs, Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private LinkedList<Film> filmovi = new LinkedList<Film>();
 
 	@Override
