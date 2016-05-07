@@ -81,7 +81,7 @@ public class GUIKontroler extends JFrame {
 	public static void dodajFilm(String naziv, int id, String reditelj, int godina, Zanr zanr) {
 		try{
 		Film f=new Film(id, naziv, reditelj, godina, zanr);
-	
+	 // postoji greska 
 		SOunesiFilm.izvrsi(f, registarFilmova.vratiSveFilmove());
 		glavniProzor.osveziTabelu();
 		
