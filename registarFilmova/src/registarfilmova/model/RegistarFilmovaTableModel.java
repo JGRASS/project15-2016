@@ -11,6 +11,12 @@ public class RegistarFilmovaTableModel extends AbstractTableModel{
 
 	private final String[] kolone={"ID", "Naziv filma","Reditelj", "Zanr","Godina", "Prosecna ocena"};
 	private LinkedList<Film> filmovi;
+	
+	
+	public RegistarFilmovaTableModel(LinkedList<Film> filmovi) {
+		this.filmovi=filmovi;
+	}
+	
 	@Override
 	public int getRowCount() {
 				return filmovi.size();

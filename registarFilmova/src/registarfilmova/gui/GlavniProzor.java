@@ -5,22 +5,35 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+
+
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
+import java.util.LinkedList;
 import java.awt.event.InputEvent;
 import javax.swing.JLabel;
+import javax.swing.JList;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import net.miginfocom.swing.MigLayout;
+import registarfilmova.Film;
+import registarfilmova.RegistarFilmova;
+import registarfilmova.model.RegistarFilmovaTableModel;
+
+import javax.swing.AbstractButton;
 import javax.swing.BoxLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
 public class GlavniProzor extends JFrame {
 
@@ -37,6 +50,10 @@ public class GlavniProzor extends JFrame {
 	private JMenuItem mntmOceniFilm;
 	private JMenuItem mntmOAutorima;
 	private JLabel lblDobroDosliU;
+	private JTable table;
+	private JList list;
+	private JScrollPane scrollPane;
+	private JTable table_1;
 
 	/**
 	 * Launch the application.
@@ -66,6 +83,7 @@ public class GlavniProzor extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		contentPane.add(getLblDobroDosliU(), BorderLayout.NORTH);
+		contentPane.add(getScrollPane(), BorderLayout.CENTER);
 	}
 
 	private JMenuBar getMenuBar_1() {
@@ -96,6 +114,11 @@ public class GlavniProzor extends JFrame {
 	private JMenuItem getMntmOpen() {
 		if (mntmOpen == null) {
 			mntmOpen = new JMenuItem("Open");
+			mntmOpen.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					GUIKontroler.ucitajFilm();
+				}
+			});
 			mntmOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
 		}
 		return mntmOpen;
@@ -110,6 +133,11 @@ public class GlavniProzor extends JFrame {
 	private JMenuItem getMntmExit() {
 		if (mntmExit == null) {
 			mntmExit = new JMenuItem("Exit");
+			mntmExit.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					GUIKontroler.zatvoriAplikaciju();
+				}
+			});
 			mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
 		}
 		return mntmExit;
@@ -152,6 +180,11 @@ public class GlavniProzor extends JFrame {
 	private JMenuItem getMntmOAutorima() {
 		if (mntmOAutorima == null) {
 			mntmOAutorima = new JMenuItem("O Autorima");
+			mntmOAutorima.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					GUIKontroler.prikaziInformacije();
+				}
+			});
 		}
 		return mntmOAutorima;
 	}
@@ -162,5 +195,30 @@ public class GlavniProzor extends JFrame {
 			lblDobroDosliU.setFont(new Font("Tahoma", Font.BOLD, 15));
 		}
 		return lblDobroDosliU;
+	}
+	
+	
+	public void osveziTabelu(){
+		
+		RegistarFilmovaTableModel model = (RegistarFilmovaTableModel) table.getModel();
+		model.osveziTabelu();
+	}
+	
+	protected void prikaziListuFilmova(LinkedList<Film> filmovi) {
+		list.setListData(filmovi.toArray());
+	}
+	private JScrollPane getScrollPane() {
+		if (scrollPane == null) {
+			scrollPane = new JScrollPane();
+			scrollPane.setViewportView(getTable_1());
+		}
+		return scrollPane;
+	}
+	private JTable getTable_1() {
+		if (table_1 == null) {
+			table_1 = new JTable();
+		}
+		table_1.setModel(new RegistarFilmovaTableModel(GUIKontroler.vratiListuFilmova()));
+		return table_1;
 	}
 }

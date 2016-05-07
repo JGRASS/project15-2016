@@ -2,15 +2,22 @@ package registarfilmova.gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.io.File;
+import java.util.LinkedList;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 
 import registarfilmova.Film;
 import registarfilmova.RegistarFilmova;
 import registarfilmova.Zanr;
 import registarfilmova.interfejs.RegistarFilmovaInterfejs;
+import registarfilmova.sistemskeoperacije.SOucitajFilm;
 import registarfilmova.sistemskeoperacije.SOunesiFilm;
 
 public class GUIKontroler extends JFrame {
@@ -53,17 +60,69 @@ public class GUIKontroler extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 	}
+	
+	public static LinkedList<Film> vratiListuFilmova(){
+		registarFilmova= RegistarFilmova.getInstance();
+     return registarFilmova.vratiSveFilmove();
+     
+		
+	}
 
 	public static void prikaziProzorDodajFilm() {
+		prozorDodajFilm.setLocationRelativeTo(glavniProzor.getContentPane());
 		prozorDodajFilm.setVisible(true);
-		prozorDodajFilm.setLocationRelativeTo(null);
+	
 	}
 
 	public static void dodajFilm(String naziv, int id, String reditelj, int godina, Zanr zanr) {
-		
+		try{
 		Film f=new Film(id, naziv, reditelj, godina, zanr);
+	
 		SOunesiFilm.izvrsi(f, registarFilmova.vratiSveFilmove());
+		glavniProzor.osveziTabelu();
 		
+		} catch(Exception e){
+			prozorDodajFilm.dispose();
+			JOptionPane.showMessageDialog(glavniProzor.getContentPane(), e.getMessage(),
+					"Greska", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	public static void prikaziInformacije() {
+		JOptionPane.showMessageDialog(
+				glavniProzor.getContentPane(),
+				"Autors: Valentina Andjelkovic 1/14 \n  Natasa Vatres 10/14",
+				"About",
+				JOptionPane.INFORMATION_MESSAGE);
+		
+	}
+
+	public static void zatvoriAplikaciju() {
+		int opcija=JOptionPane.showConfirmDialog(
+				glavniProzor.getContentPane(),
+				"Da li zelite da izadjete iz aplikacije?",
+				"Exit",
+				JOptionPane.YES_NO_OPTION);
+
+		if (opcija == JOptionPane.YES_OPTION)
+			System.exit(0);			
+	}
+
+	public static void ucitajFilm() {
+		try {
+			JFileChooser jfc = new JFileChooser();
+			int option = jfc.showOpenDialog(glavniProzor.getContentPane());
+
+			if (option == JFileChooser.APPROVE_OPTION) {
+				File file = jfc.getSelectedFile();
+				SOucitajFilm.izvrsi(file.getAbsolutePath() , registarFilmova.vratiSveFilmove()) ;
+				
+				glavniProzor.osveziTabelu();
+	 }
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(glavniProzor.getContentPane(), e.getMessage(),
+					"Greska", JOptionPane.ERROR_MESSAGE);
+		}		
 	}
 
 }
