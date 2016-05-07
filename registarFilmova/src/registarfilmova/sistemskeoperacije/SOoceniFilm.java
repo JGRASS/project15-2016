@@ -14,4 +14,5 @@ public class SOoceniFilm {
 				f.setProsecnaOcena(noviProsek);
 	}
 	
+		
 }

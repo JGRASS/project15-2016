@@ -58,19 +58,7 @@ public class GlavniProzor extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GlavniProzor frame = new GlavniProzor();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the frame.
 	 */
@@ -173,6 +161,11 @@ public class GlavniProzor extends JFrame {
 	private JMenuItem getMntmOceniFilm() {
 		if (mntmOceniFilm == null) {
 			mntmOceniFilm = new JMenuItem("Oceni film");
+			mntmOceniFilm.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					GUIKontroler.prikaziProzorOceniFilm();
+				}
+			});
 			mntmOceniFilm.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_MASK));
 		}
 		return mntmOceniFilm;

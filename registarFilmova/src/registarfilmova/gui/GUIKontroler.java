@@ -29,6 +29,7 @@ public class GUIKontroler extends JFrame {
 	 */
 	public static GlavniProzor glavniProzor;
 	public static GUIDodajFilm prozorDodajFilm;
+	public static OceniFilmGUI prozorOceniFilm;
 	static RegistarFilmovaInterfejs registarFilmova;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -38,8 +39,10 @@ public class GUIKontroler extends JFrame {
 					frame.setVisible(false);
 					glavniProzor= new GlavniProzor();
 					prozorDodajFilm=new GUIDodajFilm();
+					prozorOceniFilm=new OceniFilmGUI();
 					registarFilmova=new RegistarFilmova();
 					prozorDodajFilm.setVisible(false);
+					prozorOceniFilm.setVisible(false);
 					glavniProzor.setVisible(true);
 					glavniProzor.setLocationRelativeTo(null);
 				} catch (Exception e) {
@@ -124,5 +127,12 @@ public class GUIKontroler extends JFrame {
 					"Greska", JOptionPane.ERROR_MESSAGE);
 		}		
 	}
+
+	public static void prikaziProzorOceniFilm() {
+		prozorOceniFilm.setLocationRelativeTo(glavniProzor.getContentPane());
+		prozorOceniFilm.setVisible(true);
+	}
+
+	
 
 }

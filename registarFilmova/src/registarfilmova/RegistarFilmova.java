@@ -17,7 +17,7 @@ public class RegistarFilmova implements RegistarFilmovaInterfejs, Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	LinkedList<Film> filmovi = new LinkedList<Film>();
+	public LinkedList<Film> filmovi = new LinkedList<Film>();
 	
     private static RegistarFilmova instance;
 	
