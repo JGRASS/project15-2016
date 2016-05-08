@@ -29,6 +29,9 @@ public class Film implements Serializable{
 	}
 
 	public void setId(int id) {
+		if(id<0){
+			throw new RuntimeException("Greska pri unosu ID-a filma!");
+		}
 		this.id = id;
 	}
 
@@ -37,6 +40,9 @@ public class Film implements Serializable{
 	}
 
 	public void setNaziv(String naziv) {
+		if(naziv==null || naziv.equals(" ")){
+			throw new RuntimeException("Greska pri unosu naziva filma!");
+		}
 		this.naziv = naziv;
 	}
 
@@ -45,6 +51,9 @@ public class Film implements Serializable{
 	}
 
 	public void setReditelj(String reditelj) {
+		if(reditelj==null || reditelj.equals(" ")) {
+		 throw new RuntimeException("Greska pri unosu reditelja filma!");
+		}
 		this.reditelj = reditelj;
 	}
 
@@ -53,6 +62,9 @@ public class Film implements Serializable{
 	}
 
 	public void setGodina(int godina) {
+		if(godina<1892 || godina>2016){
+			throw new RuntimeException("Greska pri unosu godine!");
+		}
 		this.godina = godina;
 	}
 
@@ -61,6 +73,9 @@ public class Film implements Serializable{
 	}
 
 	public void setBrojOcena(int brojOcena) {
+		if(brojOcena<0){
+			throw new RuntimeException("Greska, broj ocena ne moze biti negativan broj!");
+		}
 		this.brojOcena = brojOcena;
 	}
 
@@ -69,6 +84,9 @@ public class Film implements Serializable{
 	}
 
 	public void setProsecnaOcena(double prosecnaOcena) {
+	if(prosecnaOcena<0){
+		throw new RuntimeException("Greska, prosecna ocena ne moze biti negativan broj!");
+	}
 		this.prosecnaOcena = prosecnaOcena;
 	}
 
@@ -77,6 +95,9 @@ public class Film implements Serializable{
 	}
 
 	public void setZanr(Zanr zanr) {
+		if(zanr==null){
+			throw new RuntimeException("Greska pri unosu zanra filma");
+		}
 		this.zanr = zanr;
 	}
 
