@@ -51,7 +51,7 @@ public class Film implements Serializable{
 	}
 
 	public void setReditelj(String reditelj) {
-		if(reditelj==null || reditelj.equals(" ")) {
+		if(reditelj==null || reditelj.equals("")) {
 		 throw new RuntimeException("Greska pri unosu reditelja filma!");
 		}
 		this.reditelj = reditelj;
