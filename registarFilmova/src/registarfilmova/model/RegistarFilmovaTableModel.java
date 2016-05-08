@@ -9,12 +9,16 @@ import registarfilmova.Film;
 public class RegistarFilmovaTableModel extends AbstractTableModel{
 	
 
-	private final String[] kolone={"ID", "Naziv filma","Reditelj", "Zanr","Godina", "Prosecna ocena"};
+	private final String[] kolone={"ID", "Naziv filma", "Reditelj", "Zanr", "Godina", "Prosecna ocena"};
 	private LinkedList<Film> filmovi;
 	
 	
 	public RegistarFilmovaTableModel(LinkedList<Film> filmovi) {
-		this.filmovi=filmovi;
+		if (filmovi == null) {
+			this.filmovi = new LinkedList<>();
+		} else {
+			this.filmovi = filmovi;
+		}
 	}
 	
 	@Override
@@ -36,7 +40,6 @@ public class RegistarFilmovaTableModel extends AbstractTableModel{
 		case 3: return filmovi.get(red).getZanr();
 		case 4: return filmovi.get(red).getGodina();
 		case 5: return filmovi.get(red).getProsecnaOcena();
-			
 
 		default: return "NN";
 	
@@ -54,14 +57,18 @@ public class RegistarFilmovaTableModel extends AbstractTableModel{
 	}
 	
 	
-	public void osveziTabelu(){
+	public void osveziTabelu(LinkedList<Film> f){
+		filmovi=f;
 		fireTableDataChanged();
-
 	}
 	
 	@Override
 	public String getColumnName(int arg0) {
 	
 		return kolone[arg0];
+	}
+	
+	public Film getFilmByIndex(int index){
+		return filmovi.get(index);
 	}
 }

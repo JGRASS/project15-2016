@@ -76,7 +76,7 @@ public class GUIDodajFilm extends JFrame {
 		lblIzaberiteZanr.setBounds(6, 164, 115, 16);
 		contentPane.add(lblIzaberiteZanr);
 		
-		final JComboBox comboBox = new JComboBox();
+		final JComboBox<Zanr> comboBox = new JComboBox<Zanr>();
 		comboBox.setBounds(136, 155, 134, 27);
 		contentPane.add(comboBox);
 		comboBox.addItem(Zanr.Akcija);

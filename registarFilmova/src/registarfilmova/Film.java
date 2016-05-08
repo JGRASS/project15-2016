@@ -1,7 +1,5 @@
 package registarfilmova;
 
-import java.util.GregorianCalendar;
-
 public class Film {
 
 	private int id;
@@ -17,7 +15,11 @@ public class Film {
 		this.naziv = naziv;
 		this.reditelj = reditelj;
 		this.godina = godina;
-		this.zanr = zanr;
+		this.setZanr(zanr);
+	}
+	
+	public Film(){
+		
 	}
 
 	public int getId() {
@@ -67,7 +69,7 @@ public class Film {
 	public void setProsecnaOcena(double prosecnaOcena) {
 		this.prosecnaOcena = prosecnaOcena;
 	}
-	
+
 	public Zanr getZanr() {
 		return zanr;
 	}

@@ -7,12 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
-
-
-
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.util.LinkedList;
@@ -46,25 +44,23 @@ public class GlavniProzor extends JFrame {
 	private JMenuItem mntmExit;
 	private JMenu mnFilmovi;
 	private JMenuItem mntmNoviFilm;
-	private JMenuItem mntmListaFilmova;
 	private JMenuItem mntmOceniFilm;
 	private JMenuItem mntmOAutorima;
 	private JLabel lblDobroDosliU;
 	private JTable table;
-	private JList list;
 	private JScrollPane scrollPane;
-	private JTable table_1;
+	private JMenuItem mntmObrisiFilm;
 
 	/**
 	 * Launch the application.
 	 */
-	
+
 	/**
 	 * Create the frame.
 	 */
 	public GlavniProzor() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 530, 351);
+		setBounds(100, 100, 633, 380);
 		setJMenuBar(getMenuBar_1());
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -83,6 +79,7 @@ public class GlavniProzor extends JFrame {
 		}
 		return menuBar;
 	}
+
 	private JMenu getMnNewMenu() {
 		if (mnNewMenu == null) {
 			mnNewMenu = new JMenu("File");
@@ -92,6 +89,7 @@ public class GlavniProzor extends JFrame {
 		}
 		return mnNewMenu;
 	}
+
 	private JMenu getMnNewMenu_2() {
 		if (mnNewMenu_2 == null) {
 			mnNewMenu_2 = new JMenu("About");
@@ -99,6 +97,7 @@ public class GlavniProzor extends JFrame {
 		}
 		return mnNewMenu_2;
 	}
+
 	private JMenuItem getMntmOpen() {
 		if (mntmOpen == null) {
 			mntmOpen = new JMenuItem("Open");
@@ -111,6 +110,7 @@ public class GlavniProzor extends JFrame {
 		}
 		return mntmOpen;
 	}
+
 	private JMenuItem getMntmSave() {
 		if (mntmSave == null) {
 			mntmSave = new JMenuItem("Save");
@@ -123,6 +123,7 @@ public class GlavniProzor extends JFrame {
 		}
 		return mntmSave;
 	}
+
 	private JMenuItem getMntmExit() {
 		if (mntmExit == null) {
 			mntmExit = new JMenuItem("Exit");
@@ -135,15 +136,17 @@ public class GlavniProzor extends JFrame {
 		}
 		return mntmExit;
 	}
+
 	private JMenu getMnFilmovi() {
 		if (mnFilmovi == null) {
 			mnFilmovi = new JMenu("Filmovi");
 			mnFilmovi.add(getMntmNoviFilm());
-			mnFilmovi.add(getMntmListaFilmova());
+			mnFilmovi.add(getMntmObrisiFilm());
 			mnFilmovi.add(getMntmOceniFilm());
 		}
 		return mnFilmovi;
 	}
+
 	private JMenuItem getMntmNoviFilm() {
 		if (mntmNoviFilm == null) {
 			mntmNoviFilm = new JMenuItem("Novi film");
@@ -156,13 +159,7 @@ public class GlavniProzor extends JFrame {
 		}
 		return mntmNoviFilm;
 	}
-	private JMenuItem getMntmListaFilmova() {
-		if (mntmListaFilmova == null) {
-			mntmListaFilmova = new JMenuItem("Lista filmova");
-			mntmListaFilmova.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.CTRL_MASK));
-		}
-		return mntmListaFilmova;
-	}
+
 	private JMenuItem getMntmOceniFilm() {
 		if (mntmOceniFilm == null) {
 			mntmOceniFilm = new JMenuItem("Oceni film");
@@ -175,6 +172,7 @@ public class GlavniProzor extends JFrame {
 		}
 		return mntmOceniFilm;
 	}
+
 	private JMenuItem getMntmOAutorima() {
 		if (mntmOAutorima == null) {
 			mntmOAutorima = new JMenuItem("O Autorima");
@@ -186,37 +184,70 @@ public class GlavniProzor extends JFrame {
 		}
 		return mntmOAutorima;
 	}
+
 	private JLabel getLblDobroDosliU() {
 		if (lblDobroDosliU == null) {
-			lblDobroDosliU = new JLabel("Dobrodosli u Registar Filmova");
+			lblDobroDosliU = new JLabel("Dobro dosli u Registar Filmova");
 			lblDobroDosliU.setHorizontalAlignment(SwingConstants.CENTER);
 			lblDobroDosliU.setFont(new Font("Tahoma", Font.BOLD, 15));
 		}
 		return lblDobroDosliU;
 	}
-	
-	
-	public void osveziTabelu(){
-		
+
+	public void osveziTabelu() {
 		RegistarFilmovaTableModel model = (RegistarFilmovaTableModel) table.getModel();
-		model.osveziTabelu();
+		model.osveziTabelu(GUIKontroler.vratiListuFilmova());
 	}
-	
-	protected void prikaziListuFilmova(LinkedList<Film> filmovi) {
-		list.setListData(filmovi.toArray());
-	}
+
+	/*
+	 * protected void prikaziListuFilmova(LinkedList<Film> filmovi) {
+	 * list.setListData(filmovi.toArray()); }
+	 */
+
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
-			scrollPane.setViewportView(getTable_1());
+			scrollPane.setViewportView(getTable());
 		}
 		return scrollPane;
 	}
-	private JTable getTable_1() {
-		if (table_1 == null) {
-			table_1 = new JTable();
+
+	private JTable getTable() {
+		if (table == null) {
+			table = new JTable();
 		}
-		table_1.setModel(new RegistarFilmovaTableModel(GUIKontroler.vratiListuFilmova()));
-		return table_1;
+		RegistarFilmovaTableModel model = new RegistarFilmovaTableModel(null);
+		table.setModel(model);
+		return table;
+	}
+
+	private JMenuItem getMntmObrisiFilm() {
+		if (mntmObrisiFilm == null) {
+			mntmObrisiFilm = new JMenuItem("Obrisi film");
+			mntmObrisiFilm.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					try {
+						int index = table.getSelectedRow();
+						if (index == -1) {
+							GUIKontroler.porukaGreskeBiranjeReda();
+						} else {
+							int opcija = JOptionPane.showConfirmDialog(null,
+									"Da li ste sigurni da zelite da izbrisete izbrani film?", "Poruka",
+									JOptionPane.YES_NO_OPTION);
+							if (opcija == JOptionPane.YES_OPTION) {
+								RegistarFilmovaTableModel model = (RegistarFilmovaTableModel) table.getModel();
+								Film f = model.getFilmByIndex(index);
+								GUIKontroler.obrisiFilm(f);
+							}
+						}
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(contentPane, e.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+					}
+
+				}
+			});
+			mntmObrisiFilm.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK));
+		}
+		return mntmObrisiFilm;
 	}
 }

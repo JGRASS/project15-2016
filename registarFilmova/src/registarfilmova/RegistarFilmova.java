@@ -13,20 +13,22 @@ import registarfilmova.sistemskeoperacije.SOunesiFilm;
 
 public class RegistarFilmova implements RegistarFilmovaInterfejs, Serializable{
 	
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public LinkedList<Film> filmovi = new LinkedList<Film>();
+
+	private LinkedList<Film> filmovi = new LinkedList<Film>();
 	
     private static RegistarFilmova instance;
 	
 
-	public static RegistarFilmova getInstance(){
+	/*public static RegistarFilmova getInstance(){
 		if(instance == null)
 			instance = new RegistarFilmova();
 		return instance;
-	}
+	}*/
 
 	@Override
 	public void unesiFilm(Film f) {
@@ -39,8 +41,8 @@ public class RegistarFilmova implements RegistarFilmovaInterfejs, Serializable{
 	}
 
 	@Override
-	public void oceniFilm(Film f) {
-		SOoceniFilm.izvrsi(f, filmovi);
+	public void oceniFilm(int id, int ocena) {
+		SOoceniFilm.izvrsi(id, ocena, filmovi);
 	}
 
 	@Override
