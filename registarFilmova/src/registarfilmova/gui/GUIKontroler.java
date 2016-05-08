@@ -119,7 +119,7 @@ public class GUIKontroler extends JFrame {
 
 			if (option == JFileChooser.APPROVE_OPTION) {
 				File file = jfc.getSelectedFile();
-				SOucitajFilm.izvrsi(file.getAbsolutePath(), registarFilmova.vratiSveFilmove());
+				registarFilmova.ucitajFilm(file.getAbsolutePath());
 
 				glavniProzor.osveziTabelu();
 			}
@@ -153,8 +153,8 @@ public class GUIKontroler extends JFrame {
 
 			if (option == JFileChooser.APPROVE_OPTION) {
 				File file = jfc.getSelectedFile();
-				SOsacuvajFilm.izvrsi(file.getAbsolutePath(), registarFilmova.vratiSveFilmove());
-			}
+				
+				registarFilmova.sacuvajFilm(file.getAbsolutePath());			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(glavniProzor.getContentPane(), e.getMessage(), "Greska",
 					JOptionPane.ERROR_MESSAGE);

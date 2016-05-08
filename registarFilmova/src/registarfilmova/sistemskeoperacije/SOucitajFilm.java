@@ -1,6 +1,7 @@
 package registarfilmova.sistemskeoperacije;
 
 import java.io.BufferedInputStream;
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.LinkedList;
@@ -11,11 +12,16 @@ public class SOucitajFilm {
 	public static void izvrsi(String putanja, LinkedList<Film> filmovi) {
 		try {
 			ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(putanja)));
-			@SuppressWarnings("unchecked")
-			LinkedList<Film> filmovi2 = (LinkedList<Film>) (in.readObject());
 			filmovi.clear();
-			filmovi.addAll(filmovi2);
-			in.close();
+			try{
+				while(true){
+					Film f = (Film) in.readObject();
+					filmovi.add(f);
+				}
+			}catch(EOFException e){
+					
+				}
+				in.close();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
