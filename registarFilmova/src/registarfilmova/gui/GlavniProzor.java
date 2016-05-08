@@ -32,7 +32,13 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
-
+/**
+ * Glavni prozor aplikacije
+ * @author Natasa Vatres 10/14
+ * 		Valentina Andjelkovic 1/14
+ * 
+ *
+ */
 public class GlavniProzor extends JFrame {
 
 	private JPanel contentPane;
@@ -70,6 +76,10 @@ public class GlavniProzor extends JFrame {
 		contentPane.add(getScrollPane(), BorderLayout.CENTER);
 	}
 
+	/**
+	 * 
+	 * @return  menuBar
+	 */
 	private JMenuBar getMenuBar_1() {
 		if (menuBar == null) {
 			menuBar = new JMenuBar();
@@ -80,6 +90,10 @@ public class GlavniProzor extends JFrame {
 		return menuBar;
 	}
 
+	/**
+	 * 
+	 * @return mnNewMenu
+	 */
 	private JMenu getMnNewMenu() {
 		if (mnNewMenu == null) {
 			mnNewMenu = new JMenu("File");
@@ -90,6 +104,10 @@ public class GlavniProzor extends JFrame {
 		return mnNewMenu;
 	}
 
+	/**
+	 * 
+	 * @return mnNewMenu_2
+	 */
 	private JMenu getMnNewMenu_2() {
 		if (mnNewMenu_2 == null) {
 			mnNewMenu_2 = new JMenu("About");
@@ -98,6 +116,10 @@ public class GlavniProzor extends JFrame {
 		return mnNewMenu_2;
 	}
 
+	/**
+	 * Omogucava da korisnik ucita podatke
+	 * @return mntmOpen
+	 */
 	private JMenuItem getMntmOpen() {
 		if (mntmOpen == null) {
 			mntmOpen = new JMenuItem("Open");
@@ -111,6 +133,10 @@ public class GlavniProzor extends JFrame {
 		return mntmOpen;
 	}
 
+	/**
+	 * Omogucava da korisnik sacuva podatke
+	 * @return mntmSave
+	 */
 	private JMenuItem getMntmSave() {
 		if (mntmSave == null) {
 			mntmSave = new JMenuItem("Save");
@@ -124,6 +150,10 @@ public class GlavniProzor extends JFrame {
 		return mntmSave;
 	}
 
+	/**
+	 * Omogucava izlaz iz aplikacije
+	 * @return mntmExit
+	 */
 	private JMenuItem getMntmExit() {
 		if (mntmExit == null) {
 			mntmExit = new JMenuItem("Exit");
@@ -147,6 +177,10 @@ public class GlavniProzor extends JFrame {
 		return mnFilmovi;
 	}
 
+	/**
+	 * Omogucuva da korisnik izabere opciju za unos novog filma
+	 * @return mntmNoviFilm
+	 */
 	private JMenuItem getMntmNoviFilm() {
 		if (mntmNoviFilm == null) {
 			mntmNoviFilm = new JMenuItem("Novi film");
@@ -160,6 +194,10 @@ public class GlavniProzor extends JFrame {
 		return mntmNoviFilm;
 	}
 
+	/**
+	 * Omogucava da korisnik izabere opciju ocenjivanja filma
+	 * @return mntmOceniFilm
+	 */
 	private JMenuItem getMntmOceniFilm() {
 		if (mntmOceniFilm == null) {
 			mntmOceniFilm = new JMenuItem("Oceni film");
@@ -172,7 +210,11 @@ public class GlavniProzor extends JFrame {
 		}
 		return mntmOceniFilm;
 	}
-
+	
+	/**
+	 * Omogucava da korisnik vidi podatke o autorima
+	 * @return mntmOAutorima
+	 */
 	private JMenuItem getMntmOAutorima() {
 		if (mntmOAutorima == null) {
 			mntmOAutorima = new JMenuItem("O Autorima");
@@ -184,7 +226,10 @@ public class GlavniProzor extends JFrame {
 		}
 		return mntmOAutorima;
 	}
-
+	/**
+	 * Prikazuje poruku dobrodoslice u aplikaciju
+	 * @return lblDobroDosliU
+	 */
 	private JLabel getLblDobroDosliU() {
 		if (lblDobroDosliU == null) {
 			lblDobroDosliU = new JLabel("Dobro dosli u Registar Filmova");
@@ -194,16 +239,20 @@ public class GlavniProzor extends JFrame {
 		return lblDobroDosliU;
 	}
 
+	/**
+	 * Omogucava azuriranje tabele ukoliko je doslo do nekih promena
+	 */
 	public void osveziTabelu() {
 		RegistarFilmovaTableModel model = (RegistarFilmovaTableModel) table.getModel();
 		model.osveziTabelu(GUIKontroler.vratiListuFilmova());
 	}
 
-	/*
-	 * protected void prikaziListuFilmova(LinkedList<Film> filmovi) {
-	 * list.setListData(filmovi.toArray()); }
-	 */
+	
 
+	/**
+	 * 
+	 * @return scrollPane
+	 */
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
@@ -211,29 +260,43 @@ public class GlavniProzor extends JFrame {
 		}
 		return scrollPane;
 	}
+	
 
+	/**
+	 * 
+	 * @return table
+	 */
 	private JTable getTable() {
 		if (table == null) {
 			table = new JTable();
 		}
+		// postavljamo tabelu prosledjujuci joj nas model klase RegistarFilmovaTableModel
 		RegistarFilmovaTableModel model = new RegistarFilmovaTableModel(null);
 		table.setModel(model);
 		return table;
 	}
 
+	/**
+	 * Omogucava brisanje filma iz tabele
+	 * @return mntmObrisiFilm
+	 */
 	private JMenuItem getMntmObrisiFilm() {
 		if (mntmObrisiFilm == null) {
 			mntmObrisiFilm = new JMenuItem("Obrisi film");
 			mntmObrisiFilm.addActionListener(new ActionListener() {
+				
 				public void actionPerformed(ActionEvent arg0) {
 					try {
+						// prestavlja selektovani red u tabeli 
 						int index = table.getSelectedRow();
 						if (index == -1) {
+							// ukoliko nije selektovan red prikazuje poruku greske
 							GUIKontroler.porukaGreskeBiranjeReda();
 						} else {
 							int opcija = JOptionPane.showConfirmDialog(null,
 									"Da li ste sigurni da zelite da izbrisete izbrani film?", "Poruka",
 									JOptionPane.YES_NO_OPTION);
+							// ukoliko korisnik definitivno zeli da obrise izabrani film
 							if (opcija == JOptionPane.YES_OPTION) {
 								RegistarFilmovaTableModel model = (RegistarFilmovaTableModel) table.getModel();
 								Film f = model.getFilmByIndex(index);
@@ -241,6 +304,7 @@ public class GlavniProzor extends JFrame {
 							}
 						}
 					} catch (Exception e) {
+						// izbacuje poruku o gresci ukoliko je do nje doslo
 						JOptionPane.showMessageDialog(contentPane, e.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
 					}
 

@@ -6,13 +6,24 @@ import javax.swing.table.AbstractTableModel;
 
 import registarfilmova.Film;
 
+/**
+ * Klasa nasledjuje AbstractTableModel i omogucava nam da sami kreiramo svoju tabelu
+ * @author Natasa Vatres 10/14
+ * 			Valentina Andjelkovic 1/14
+ *
+ */
 public class RegistarFilmovaTableModel extends AbstractTableModel{
 	
-
+	// niz stringova koja predstavlja nazive kolona tabele
 	private final String[] kolone={"ID", "Naziv filma", "Reditelj", "Zanr", "Godina", "Prosecna ocena"};
+	// lista filmova
 	private LinkedList<Film> filmovi;
 	
 	
+	/**
+	 * Konstruktor koji inicijalizuje listu filmova 
+	 * @param filmovi
+	 */
 	public RegistarFilmovaTableModel(LinkedList<Film> filmovi) {
 		if (filmovi == null) {
 			this.filmovi = new LinkedList<>();
@@ -20,6 +31,7 @@ public class RegistarFilmovaTableModel extends AbstractTableModel{
 			this.filmovi = filmovi;
 		}
 	}
+	
 	
 	@Override
 	public int getRowCount() {
@@ -52,11 +64,9 @@ public class RegistarFilmovaTableModel extends AbstractTableModel{
 		return false;
 	}
 	
-	public Film vratiKurs(int index){
-		return filmovi.get(index);
-	}
-	
-	
+	/*
+	 * Azuriranje tabelu
+	 */
 	public void osveziTabelu(LinkedList<Film> f){
 		filmovi=f;
 		fireTableDataChanged();
@@ -68,6 +78,11 @@ public class RegistarFilmovaTableModel extends AbstractTableModel{
 		return kolone[arg0];
 	}
 	
+	/**
+	 * Vraca film prosledjenog reda tabele
+	 * @param index
+	 * @return film
+	 */
 	public Film getFilmByIndex(int index){
 		return filmovi.get(index);
 	}

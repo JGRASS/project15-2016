@@ -4,6 +4,11 @@ import java.util.LinkedList;
 
 import registarfilmova.Film;
 
+/** 
+ * Interfejs koji sadrzi specifikaciju registra filmova
+ * @author Valentina Andjelkovic 1/14, Natasa Vatres 10/14
+ *
+ */
 public interface RegistarFilmovaInterfejs {
 
 	public void unesiFilm(Film f);

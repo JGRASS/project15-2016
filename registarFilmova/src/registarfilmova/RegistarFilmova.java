@@ -1,6 +1,7 @@
 package registarfilmova;
 
 import java.io.Serializable;
+
 import java.util.LinkedList;
 
 import registarfilmova.interfejs.RegistarFilmovaInterfejs;
@@ -11,6 +12,14 @@ import registarfilmova.sistemskeoperacije.SOsacuvajFilm;
 import registarfilmova.sistemskeoperacije.SOucitajFilm;
 import registarfilmova.sistemskeoperacije.SOunesiFilm;
 
+
+/**
+ * Klasa predstavlja registar filmova, implementira RegistarFimovaInterfjes
+ * @author Andjelkovic Valentina 1/14,
+ * 			 Natasa Vatres 10/14
+ *
+ */
+
 public class RegistarFilmova implements RegistarFilmovaInterfejs, Serializable{
 	
 	
@@ -19,6 +28,7 @@ public class RegistarFilmova implements RegistarFilmovaInterfejs, Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	// lista filmova
 	private LinkedList<Film> filmovi = new LinkedList<Film>();
 	
     private static RegistarFilmova instance;
