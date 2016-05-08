@@ -40,7 +40,7 @@ public class Film implements Serializable{
 	}
 
 	public void setNaziv(String naziv) {
-		if(naziv==null || naziv.equals(" ")){
+		if(naziv==null || naziv.equals("")){
 			throw new RuntimeException("Greska pri unosu naziva filma!");
 		}
 		this.naziv = naziv;

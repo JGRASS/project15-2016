@@ -116,7 +116,7 @@ public class FilmTest {
 	public void testSetProsecnaOcenaSveOk() {
 		int prosecnaOcena = 10;
 		f.setProsecnaOcena(prosecnaOcena);
-		assertEquals(prosecnaOcena, f.getProsecnaOcena());
+		assertEquals(prosecnaOcena, f.getProsecnaOcena(), 0.1);
 	}
 	
 	@Test (expected = java.lang.RuntimeException.class)
